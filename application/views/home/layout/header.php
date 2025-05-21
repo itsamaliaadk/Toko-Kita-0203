@@ -13,16 +13,16 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="<?php echo base_url('assets/home/lib/owlcarousel/assets/owl.carousel.min.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/home/lib/owlcarousel/assets/owl.carousel.min.css'); ?>" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="<?php echo base_url('assets/home/css/style.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/home/css/style.css'); ?>" rel="stylesheet">
 </head>
 
 <body>
@@ -94,7 +94,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid mb-5">
         <div class="row border-top px-xl-5">
-		<?php $this->load->view('home/layout/kategori');?>
+            <?php $this->load->view('home/layout/kategori'); ?>
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
@@ -103,46 +103,47 @@
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-					<?php if(empty($this->session->userdata('Member'))) { ?>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <a href="<?php echo site_url(); ?>" class="nav-item nav-link active">Home</a>
-                            <a href="#" class="nav-item nav-link">Shop</a>
-                            <a href="#" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
+                    <?php if (empty($this->session->userdata('Member'))) { ?>
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto py-0">
+                                <a href="<?php echo site_url(); ?>" class="nav-item nav-link active">Home</a>
+                                <a href="<?php echo site_url('Merek'); ?>" class="nav-item nav-link">Merek</a>
+                                <a href="#" class="nav-item nav-link">Shop</a>
+                                <a href="#" class="nav-item nav-link">Shop Detail</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="cart.html" class="dropdown-item">Shopping Cart</a>
+                                        <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                    </div>
                                 </div>
+                                <a href="#" class="nav-item nav-link">Contact</a>
                             </div>
-                            <a href="#" class="nav-item nav-link">Contact</a>
+                            <div class="navbar-nav ml-auto py-0">
+                                <a href="<?php echo site_url('main/login'); ?>" class="nav-item nav-link">Login</a>
+                                <a href="<?php echo site_url('main/register'); ?>" class="nav-item nav-link">Register</a>
+                            </div>
                         </div>
-                        <div class="navbar-nav ml-auto py-0">
-                            <a href="<?php echo site_url('main/login'); ?>" class="nav-item nav-link">Login</a>
-                            <a href="<?php echo site_url('main/register'); ?>" class="nav-item nav-link">Register</a>
+                    <?php } else { ?>
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto py-0">
+                                <a href="index.html" class="nav-item nav-link active">Beranda</a>
+                                <a href="<?php echo site_url('toko'); ?>" class="nav-item nav-link">Toko</a>
+                                <a href="detail.html" class="nav-item nav-link">Transaksi</a>
+                            </div>
+                            <div class="navbar-nav ml-auto py-0">
+                                <a href="<?php echo site_url('main/logout'); ?>" class="nav-item nav-link">Logout</a>
+
+                            </div>
                         </div>
-                    </div>
-					<?php }  else { ?>
-						<div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Beranda</a>
-                            <a href="<?php echo site_url('toko'); ?>" class="nav-item nav-link">Toko</a>
-                            <a href="detail.html" class="nav-item nav-link">Transaksi</a>
-                        </div>
-                        <div class="navbar-nav ml-auto py-0">
-                            <a href="<?php echo site_url('main/logout'); ?>" class="nav-item nav-link">Logout</a>
-                            
-                        </div>
-                    </div>
-						<?php } ?>
+                    <?php } ?>
                 </nav>
-				<?php
-			$loc=$this->uri->segment('1');
-			if($loc==""){
-				$this->load->view('home/slider');
-			}
-				?>
+                <?php
+                $loc = $this->uri->segment('1');
+                if ($loc == "") {
+                    $this->load->view('home/slider');
+                }
+                ?>
 
             </div>
         </div>

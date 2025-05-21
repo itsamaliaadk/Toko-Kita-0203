@@ -8,7 +8,7 @@ class Main extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Madmin');
-
+		$this->load->model('Merek_model');
 		$this->load->library('cart');
 	}
 
@@ -16,6 +16,7 @@ class Main extends CI_Controller
 	{
 		$data['produk'] = $this->Madmin->get_all_data('tbl_produk')->result();
 		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$data['merek'] = $this->Merek_model->get_all_merek();
 		$this->load->view('home/layout/header', $data);
 		$this->load->view('home/layanan');
 		$this->load->view('home/home');
