@@ -48,9 +48,31 @@ class Adminpanel extends CI_Controller
 		$this->load->view('admin/layout/footer');
 	}
 
+	// NEW = 5656
 	public function save_password()
 	{
-		echo $this->input->post('password');
+		// mengecek apakah user sudah login
+		if (empty($this->session->userdata('userName'))) {
+			redirect('adminpanel');
+		}
+
+		// ambil pass dr form
+		$new_pass = $this->input->post('password');
+		$hashed_password = md5($new_pass);
+
+		// ambil usn yg lg login dr session
+		$username = $this->session->userdata('userName');
+
+		$this->load->model('Madmin');
+
+		// save new pass ke db
+		$data = array('password' => $hashed_password);
+		$this->Madmin->update('tbl_admin', $data, 'userName', $username);
+
+		// notif
+		$this->session->set_flashdata('msg', 'Password changed successfully');
+
+		redirect('adminpanel/dashboard');
 	}
 
 	public function logout()
