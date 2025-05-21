@@ -17,19 +17,6 @@
   </div>
   <!-- /.content-header -->
 
-  <!-- NEW CODE -->
-  <!-- notif change pass -->
-  <?php if ($this->session->flashdata('msg')): ?>
-    <div class="container-fluid">
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?= $this->session->flashdata('msg'); ?>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </div>
-  <?php endif; ?>
-
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">

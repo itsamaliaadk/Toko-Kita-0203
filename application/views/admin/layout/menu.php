@@ -59,9 +59,9 @@
 					</a>
 				 </li>
          <li clas="nav-item">
-					<a href="<?php echo site_url('adminpanel/edit_password'); ?>" class="nav-link">
+					<a href="<?php echo site_url('adminpanel/edit_profile'); ?>" class="nav-link">
 					<i class="nav-icon fas fa-circle"></i>	
-					<p>Edit Password</p>
+					<p>Edit Profile</p>
 					</a>
 				 </li>
 				 <li clas="nav-item">

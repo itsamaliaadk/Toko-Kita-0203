@@ -40,20 +40,42 @@ class Adminpanel extends CI_Controller
 		}
 	}
 
-	public function edit_password()
+	// NEW EDIT PROFILE ADMIN
+	public function edit_profile()
 	{
+		if (empty($this->session->userdata('userName'))) {
+			redirect('adminpanel');
+		}
+
+		$this->load->model('Madmin');
+		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', ['userName' => $this->session->userdata('userName')])->row();
+
 		$this->load->view('admin/layout/header');
 		$this->load->view('admin/layout/menu');
-		$this->load->view('admin/formEditPass');
+		$this->load->view('admin/formEditProfile', $data);
 		$this->load->view('admin/layout/footer');
 	}
 
-	// NEW = 5656
+	public function save_profile()
+	{
+		$this->load->model('Madmin');
+		$usnNew = $this->input->post('userName');
+		$usnOld = $this->session->userdata('userName');
+
+		$this->Madmin->update('tbl_admin', ['userName' => $usnNew], 'userName', $usnOld);
+
+		// update session biar ga logout
+		$this->session->set_userdata('userName', $usnNew);
+		$this->session->set_flashdata('msg', 'Username changed successfully!');
+		redirect('adminpanel/edit_profile');
+	}
+
+	// NEW = 5656 | OLD = 12345
 	public function save_password()
 	{
 		// mengecek apakah user sudah login
 		if (empty($this->session->userdata('userName'))) {
-			redirect('adminpanel');
+			redirect('adminpanel/edit_profile');
 		}
 
 		// ambil pass dr form
@@ -70,9 +92,9 @@ class Adminpanel extends CI_Controller
 		$this->Madmin->update('tbl_admin', $data, 'userName', $username);
 
 		// notif
-		$this->session->set_flashdata('msg', 'Password changed successfully');
+		$this->session->set_flashdata('msg', 'Password changed successfully!');
 
-		redirect('adminpanel/dashboard');
+		redirect('adminpanel/edit_profile');
 	}
 
 	public function logout()
