@@ -85,4 +85,40 @@ class Main extends CI_Controller
 		$this->session->sess_destroy();
 		redirect('main/login');
 	}
+
+	public function detail($id)
+	{
+		$data['produk'] = $this->Madmin->get_by_id('tbl_produk', 'id_produk', $id)->row_array();
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$data['merek'] = $this->Madmin->get_all_data('tbl_merek')->result();
+		$data['pertanyaan'] = $this->db->get_where('tbl_pertanyaan', ['id_produk' => $id])->result_array();
+
+		$this->load->view('home/layout/header', $data);
+		$this->load->view('home/detail', $data);
+		$this->load->view('home/layout/footer');
+	}
+
+	public function kirim_pertanyaan()
+	{
+		$data = [
+			'id_produk' => $this->input->post('id_produk'),
+			'nama_pengirim' => $this->input->post('nama_pengirim'),
+			'pertanyaan' => $this->input->post('pertanyaan'),
+		];
+		$this->db->insert('tbl_pertanyaan', $data);
+		$this->session->set_flashdata('pesan', 'Pertanyaan berhasil dikirim.');
+		redirect('main/detail/' . $data['id_produk']);
+	}
+
+	public function add_to_cart($id)
+	{
+		$data = array(
+			'id' => $this->input->post('id_produk'),
+			'qty' => $this->input->post('qty'),
+			'price' => $this->input->post('harga'),
+			'name' => $this->input->post('namaProduk')
+		);
+		$this->cart->insert($data);
+		redirect('main');
+	}
 }
